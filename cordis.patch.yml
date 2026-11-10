@@ -1,0 +1,41 @@
+# dsh-plugin-pinky — connect Pinky's phone-control MCP server to DeepSeek Harness.
+#
+# Pinky (https://github.com/DIYgod/pinky) lets an agent operate a real Android
+# phone or iPhone, with the person approving the risky steps. The agent starts
+# Pinky's stdio shim (`Pinky.exe mcp` / `pinkyctl mcp`), which forwards to the
+# running Pinky app over a local pipe.
+#
+# This row mounts @deepseek-ai/dsh-mcp-client (shipped with dsh). Tools appear
+# as mcp__pinky__<tool>, and the MCP resource provider is named `pinky`.
+#
+# If Pinky lives somewhere else, override the whole config in your profile's
+# user patch (~/.dsh/profiles/<name>/cordis.patch.yml, or the --patch overlay):
+#
+#   - id: mcp-pinky
+#     config:
+#       serverName: pinky
+#       transport: stdio
+#       command: 'D:\Pinky\Pinky.exe'
+#       args: [mcp]
+#       toolCallTimeoutMs: 120000
+#       failOnStartupError: false
+#
+# `config` is replaced wholesale, so restate every field the row needs.
+- insert:
+    - id: mcp-pinky
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: pinky
+        transport: stdio
+        # Default install locations per platform; PINKY_BIN wins when set.
+        # Windows: %LOCALAPPDATA%\Programs\Pinky\Pinky.exe (installer default)
+        # macOS:   /Applications/Pinky.app/Contents/MacOS/Pinky
+        # Linux:   /opt/pinky/pinky (the .deb) or ~/.local/pinky.app/pinky
+        command: !!js >-
+          process.env.PINKY_BIN || (process.platform === 'win32' ? ((process.env.LOCALAPPDATA || 'C:\\Program Files') + '\\Programs\\Pinky\\Pinky.exe') : process.platform === 'darwin' ? '/Applications/Pinky.app/Contents/MacOS/Pinky' : '/opt/pinky/pinky')
+        args:
+          - mcp
+        # Pinky holds an approval call up to 45 s before returning approval_pending,
+        # so allow more than the client's default 60 s.
+        toolCallTimeoutMs: 120000
+        failOnStartupError: false

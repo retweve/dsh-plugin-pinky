@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Pinky 手机控制",
+    "description": "接入 Pinky 的 MCP 服务，让智能体在你批准风险操作的前提下操作安卓手机或 iPhone。"
+  }
+}

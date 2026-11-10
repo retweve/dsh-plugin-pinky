@@ -1,0 +1,48 @@
+{
+  "name": "dsh-plugin-pinky",
+  "version": "0.1.0",
+  "description": "Connect Pinky, the phone-control MCP server, to DeepSeek Harness: the agent can operate a real Android phone or iPhone while you approve the risky steps. 把 Pinky 手机控制 MCP 接入 DeepSeek Harness。",
+  "type": "module",
+  "license": "MIT",
+  "author": "retweve",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "mcp",
+    "pinky",
+    "android",
+    "ios",
+    "iphone",
+    "phone",
+    "mobile-automation"
+  ],
+  "homepage": "https://github.com/retweve/dsh-plugin-pinky",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/retweve/dsh-plugin-pinky.git"
+  },
+  "bugs": {
+    "url": "https://github.com/retweve/dsh-plugin-pinky/issues"
+  },
+  "exports": {
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.1-rc.2"
+  }
+}

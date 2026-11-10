@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Pinky Phone Control",
+    "description": "Connects Pinky's MCP server so the agent can operate your Android phone or iPhone, with you approving the risky steps."
+  }
+}
