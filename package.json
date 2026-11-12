@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Connect Pinky, the phone-control MCP server, to DeepSeek Harness: the agent can operate a real Android phone or iPhone while you approve the risky steps. 把 Pinky 手机控制 MCP 接入 DeepSeek Harness。",
   "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\""
+  },
   "license": "MIT",
   "author": "retweve",
   "keywords": [
